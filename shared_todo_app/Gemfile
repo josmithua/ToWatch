@@ -28,7 +28,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 
 # Fixes error "`attr_accessible` is extracted out of Rails into a gem. Please use new recommended protection model for params(strong_parameters) or add `protected_attributes` to your Gemfile to use old one."
-gem 'protected_attributes'
+# gem 'protected_attributes'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

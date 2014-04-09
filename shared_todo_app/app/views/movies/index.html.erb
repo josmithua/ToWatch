@@ -1,0 +1,30 @@
+<title>ToWatch</title>
+<div class="container">
+	<div class="row">
+		<div class="span4">
+			<h1>Movies To Watch</h1>
+			<hr>
+			<p>All your movies here:</p>
+
+			<%= form_for :movie, url: {:action => "create"} do |f| %>
+				<%= f.text_field :title %>
+				<%= f.submit("Add movie", class: "btn btn-primary") %>
+			<% end %>
+
+			<h3>Listing Movies</h3>
+			<table class="table table-striped">
+				<tr>
+			    	<th>Title</th>
+			    	<th>Text</th>
+				</tr>
+
+			<% @movies.each do |movie| %>
+			    <tr>
+			    	<td><%= movie.title %></td>
+			    	<td><%= movie.rating %>/5</td>
+			    </tr>
+			  <% end %>
+</table>
+		</div>
+	</div>
+</div>

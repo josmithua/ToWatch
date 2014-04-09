@@ -3,7 +3,7 @@ class TodosController < ApplicationController
 		@todo_items = Todo.all
 		@new_todo = Todo.new
   end
-  
+
   def delete
 		params[:todos_checkbox].each do |check|
 			todo_id = check
@@ -12,7 +12,7 @@ class TodosController < ApplicationController
 		end
 		redirect_to index_path
   end
-	
+
   def add
 		debugger
 		todo = Todo.create(:todo_item => params[:todo][:todo_item])
@@ -23,7 +23,7 @@ class TodosController < ApplicationController
 		end
 		redirect_to index_path
   end
-  
+
   def complete
 	  if params[:delete_todos]
 			params[:todos_checkbox].each do |check|
@@ -41,5 +41,10 @@ class TodosController < ApplicationController
 		end
 		redirect_to index_path
 	end #complete
-	
+
+  private
+      def todo_params
+          params.require(:todo).permit(:todo_item, :todo_id, :todos_checkbox, :delete_todos)
+      end
+      
 end #class

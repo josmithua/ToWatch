@@ -3,12 +3,15 @@ SharedTodoApp::Application.routes.draw do
   match "todos/delete" => "todos#delete", :via => :post
   match "todos/add" => "todos#add", :via => :post
   match "todos/complete" => "todos#complete", :via => :post
-  
+
+  get "movies/index" => "movies#index", :as => :movies
+  match "movies/create" => "movies#create", :via => :post
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+    root "todos#index"
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
