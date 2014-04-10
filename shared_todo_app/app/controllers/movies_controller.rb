@@ -1,6 +1,6 @@
 class MoviesController < ApplicationController
   def index
-      @movies = Movie.all
+      @movies = Movie.order(watched: :asc).order(created_at: :desc)
   end
 
   def create
@@ -16,15 +16,19 @@ class MoviesController < ApplicationController
               m = Movie.find_by_id(movie_id)
               m.update_attribute(:watched, !m.watched)
           end
+			elsif params[:delete_movies]
+					params[:movies_checkbox].each do |check|
+              movie_id = check
+              m = Movie.find_by_id(movie_id)
+							m.delete
+					end
       end
       redirect_to movies_path
   end
 
-  def self.getpic(title)
-      results = GoogleCustomSearchApi.search(title + " minimalist movie poster", :num => 1)
-      results.items.first do |item|
-          puts item.link
-      end
+  def self.getpiclink(title)
+		image = Google::Search::Image.new(:query => title + " minimalist movie poster").first	
+		return image.uri
   end
 
   private

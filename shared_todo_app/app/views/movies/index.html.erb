@@ -6,7 +6,7 @@
 			<hr>
 
 			<%= form_for :movie, url: {:action => "create"} do |f| %>
-				<%= f.text_field :title %>
+				<%= f.text_field :title, :placeholder => " Title" %>
 				<%= f.submit("Add movie", class: "btn btn-primary") %>
 			<% end %>
 
@@ -27,7 +27,7 @@
 					<% else %>
 						<tr>
 					<% end %>
-					<td><%= check_box_tag("movies_checkbox[]", movie.id) %></td>
+					<td><%= check_box_tag("movies_checkbox[]", movie.id) %> <%= image_tag(MoviesController.getpiclink(movie.title), :width => "50", :height => "70") %></td>
 				    <td><%= movie.title %></td>
 				    <td>
 						<% if movie.rating %>
@@ -40,9 +40,9 @@
 				    </tr>
 				<% end %>
 			</table>
-			<%= submit_tag("Toggle Watched", :name => "watched_toggle") %>
+			<%= submit_tag("Toggle Watched", :name => "watched_toggle", :class => "btn btn-sm") %>
+			<%= submit_tag("Delete selected movies", :name => "delete_movies", :class => "btn btn-danger btn-sm") %>
 			<% end %>
-			<p><%= MoviesController.getpic(@movies.first.title) %></p>
 		</div>
 	</div>
 </div>
