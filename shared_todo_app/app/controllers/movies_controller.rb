@@ -20,8 +20,10 @@ class MoviesController < ApplicationController
       redirect_to movies_path
   end
 
-  def getpic(title)
-      title
+  def self.getpic(title)
+      results = GoogleCustomSearchApi.search(title + " minimalist movie poster")
+      item = results.items.first
+      item.link
   end
 
   private

@@ -7,7 +7,7 @@ SharedTodoApp::Application.routes.draw do
   get "movies/index" => "movies#index", :as => :movies
   match "movies/create" => "movies#create", :via => :post
   match "movies/update" => "movies#update", :via => :post
-  get "movies/getpic" => "movies#getpic"
+  # get "movies/getpic" => "movies#getpic"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
