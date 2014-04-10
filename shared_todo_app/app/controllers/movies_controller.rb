@@ -21,9 +21,10 @@ class MoviesController < ApplicationController
   end
 
   def self.getpic(title)
-      results = GoogleCustomSearchApi.search(title + " minimalist movie poster")
-      item = results.items.first
-      item.link
+      results = GoogleCustomSearchApi.search(title + " minimalist movie poster", :num => 1)
+      results.items.first do |item|
+          puts item.link
+      end
   end
 
   private
