@@ -4,27 +4,45 @@
 		<div class="span4">
 			<h1>Movies To Watch</h1>
 			<hr>
-			<p>All your movies here:</p>
 
 			<%= form_for :movie, url: {:action => "create"} do |f| %>
 				<%= f.text_field :title %>
 				<%= f.submit("Add movie", class: "btn btn-primary") %>
 			<% end %>
 
-			<h3>Listing Movies</h3>
-			<table class="table table-striped">
-				<tr>
-			    	<th>Title</th>
-			    	<th>Text</th>
-				</tr>
+			<%= form_tag("/movies/update/", :method => "post") do %>
 
-			<% @movies.each do |movie| %>
-			    <tr>
-			    	<td><%= movie.title %></td>
-			    	<td><%= movie.rating %>/5</td>
-			    </tr>
-			  <% end %>
-</table>
+				<h3>Listing Movies</h3>
+				<table class="table table-striped">
+					<tr>
+						<th>Watched</th>
+						<th>Title</th>
+						<th>My Rating</th>
+						<th></th>
+					</tr>
+
+					<% @movies.each do |movie| %>
+					<% if movie.watched %>
+				    	<tr class="success">
+					<% else %>
+						<tr>
+					<% end %>
+					<td><%= check_box_tag("movies_checkbox[]", movie.id) %></td>
+				    <td><%= movie.title %></td>
+				    <td>
+						<% if movie.rating %>
+							<%= movie.rating %>/5
+						<% else %>
+							Not rated
+						<% end %>
+					</td>
+					<td><%= submit_tag("Edit", :class => "btn btn-info btn-xs", :name => "edit_movie") %></td>
+				    </tr>
+				<% end %>
+			</table>
+			<%= submit_tag("Toggle Watched", :name => "watched_toggle") %>
+			<p><% getpic(@movies.first.title) %></p>
+			<% end %>
 		</div>
 	</div>
 </div>

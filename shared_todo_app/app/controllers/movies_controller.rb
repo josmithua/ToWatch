@@ -9,6 +9,21 @@ class MoviesController < ApplicationController
       redirect_to movies_path
   end
 
+  def update
+      if params[:watched_toggle]
+          params[:movies_checkbox].each do |check|
+              movie_id = check
+              m = Movie.find_by_id(movie_id)
+              m.update_attribute(:watched, !m.watched)
+          end
+      end
+      redirect_to movies_path
+  end
+
+  def getpic(title)
+      title
+  end
+
   private
       def movie_params
           params.require(:movie).permit(:title)
